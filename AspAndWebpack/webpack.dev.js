@@ -5,9 +5,8 @@ const CommonConfig = require("./webpack.common.js");
 
 module.exports = Merge(CommonConfig, {
     devtool: "inline-source-map",
-
-    entry: path.resolve(__dirname, "src/index.ts"),
-
+    mode: 'development',
+    entry: path.resolve(__dirname, "src/index.tsx"),
     output: {
         filename: "bundle.js",
         path: __dirname + "/dist",
@@ -17,23 +16,6 @@ module.exports = Merge(CommonConfig, {
         library: "aspAndWebpack",
         libraryTarget: "var"
     },
-
-    module: {
-        loaders: [
-            // All css files will be handled here
-            {
-                test: /\.css$/,
-                use: ["style-loader", "css-loader"]
-            },
-
-            // All files with ".less" will be handled and transpiled to css
-            {
-                test: /\.less$/,
-                use: ["style-loader", "css-loader", "less-loader"]
-            }
-        ]
-    },
-
     plugins: ([
         new webpack.DefinePlugin({
             "process.env": {
